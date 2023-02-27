@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Amazing Events Upcoming Events</title>
+    <link rel="shortcut icon" href="assets/logo-favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img class="logo" src="./assets/Logo_Amazing_Events.png" alt="Logo Amazing" width="120" height="30" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Upcoming Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./past_events.html">Past Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./stats.html">Stats</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn btn-outline-dark search" type="submit">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <header>
+        <div class="nombre-pagina">
+            <a href="./index.html" class="btn btn-outline-dark flechas"><i
+                    class="bi bi-chevron-compact-left"></i></a>
+            <h2>UPCOMING EVENT</h2>
+            <a href="./past_events.html" class="btn btn-outline-dark flechas"><i
+                    class="bi bi-chevron-compact-right"></i></a>
+        </div>
+    </header>
+    <main>
+        <div class="options">
+            <div class="category">
+                <input type="radio" id="category" name="position" value="category">
+                <label for="category">Category</label>
+                <br>
+                <input type="radio" id="category" name="position" value="category">
+                <label for="category">Category</label>
+                <br>
+                <input type="radio" id="category" name="position" value="category">
+                <label for="category">Category</label>
+                <br>
+                <input type="radio" id="category" name="position" value="category">
+                <label for="category">Category</label>
+            </div>
+        </div>
+        <section>
+            <div class="conteiner-card">
+                <div class="d-flex" id="cards">
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bd-footer py-2 py-md-0 mt-0">
+        <div class="container py-2 py-md-2 px-2 px-md-2 text-body-secondary">
+            <div class="row align-items-center">
+                <a href="https://www.instagram.com/tu_usuario_de_instagram/" class=" btn col-12 col-lg-2 mb-1"><i
+                        class="bi bi-instagram iconos"></i></a>
+                <a href="https://www.facebook.com/" class=" btn col-12 col-lg-2 mb-1"><i
+                        class="bi bi-facebook iconos"></i></a>
+                <a href="https://web.whatsapp.com/" class=" btn col-12 col-lg-2 mb-1"><i
+                        class="bi bi-whatsapp iconos"></i></a>
+                <div class="col-12 col-lg-4 mb-3 text-center cohort">
+                    <h5>Cohort</h5>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="./script/data.js"></script>
+    <script src="./script/index.js"></script>
+    <script src="./script/upcoming.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
