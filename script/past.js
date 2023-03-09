@@ -1,4 +1,7 @@
-for (let evento of pastEvents) {
+let parentElem = document.getElementById('cards');
+let fragmen = document.createDocumentFragment();
+
+for (let i = 0; i < data.events.length; i++) {
 
 
     //nuevo div
@@ -28,9 +31,9 @@ for (let evento of pastEvents) {
     newDescElement.textContent = evento.description;
     newDivElement.appendChild(newDescElement);
 
-    //precio y "ver mas"
+    //precio y "details"
     let newVypElement = document.createElement("div");
-    newVypElement.classList.add("vyp");
+    newVypElement.classList.add("details-y-precio");
     let newPrecioElement = document.createElement("p");
     newPrecioElement.textContent = "Price $" + evento.price;
     newVypElement.appendChild(newPrecioElement);
@@ -42,9 +45,9 @@ for (let evento of pastEvents) {
     newDivElement.appendChild(newVypElement);
 
     //agrgar todo al padre
-    fragment.appendChild(newDivElement);
+    fragmen.appendChild(newDivElement);
 
-    parentElement.appendChild(fragment);
+    parentElem.appendChild(fragment);
 
 
 }
@@ -63,3 +66,56 @@ for (let i = 0; i < data.events.length; i++) {
     }
 }
 console.log(pastEvents)
+
+
+//////////search/////////
+
+const form = document.querySelector('form');
+
+form.addEventListener('keyup', (event) => {
+    event.preventDefault();
+
+    const searchTerm = document.querySelector('#search-input').value.toLowerCase();
+    const events = document.querySelectorAll('.card');
+
+    for (let i = 0; i < events.length; i++) {
+        const name = events[i].querySelector('.card-title').textContent.toLowerCase();
+        const description = events[i].querySelector('.card-text').textContent.toLowerCase();
+
+        if (name.includes(searchTerm) || description.includes(searchTerm)) {
+            events[i].style.display = '';
+            events[i].classList.remove('hidden');
+        } else {
+            events[i].style.display = 'none';
+            events[i].classList.add('hidden');
+        }
+    }
+});
+
+
+
+function createCheckbox(name, value, id, labelText) {
+    var label = document.createElement("label");
+    label.innerHTML = labelText;
+
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.name = name;
+    checkbox.value = value;
+    checkbox.id = id;
+
+    label.appendChild(checkbox);
+
+    return label;
+}
+
+
+var checkboxesDiv = document.getElementById("checkboxes");
+
+checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Food Fair"));
+checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Museum"));
+checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Race"))
+checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Book Exchange"))
+checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Music Concert"))
+checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Costum Party"))
+checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Cinema"))
