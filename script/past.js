@@ -1,121 +1,181 @@
-let parentElem = document.getElementById('cards');
-let fragmen = document.createDocumentFragment();
-
-for (let i = 0; i < data.events.length; i++) {
-
-
-    //nuevo div
-    let newDivElement = document.createElement("div");
-    newDivElement.classList.add("card", "mx-2", "p-2", "mt-5", "border");
-    /*  newDivElement.style.width = "15rem"; */
-
-    //agregar img al div
-    let newImgElement = document.createElement("img");
-    newImgElement.src = evento.image;
-    newImgElement.width = "245";
-    newImgElement.height = "150";
-    newImgElement.classList.add("card-img-top");
-
-    newDivElement.appendChild(newImgElement);
-
-    //titulo del div
-    let newTitleElemnt = document.createElement("h4");
-    newTitleElemnt.classList.add("card-title", "d-flex", "justify-content-center");
-    newTitleElemnt.textContent = evento.name;
-    newDivElement.appendChild(newTitleElemnt);
-
-
-    //descripcion
-    let newDescElement = document.createElement("p");
-    newDescElement.classList.add("card-text", "d-flex", "justify-content-center");
-    newDescElement.textContent = evento.description;
-    newDivElement.appendChild(newDescElement);
-
-    //precio y "details"
-    let newVypElement = document.createElement("div");
-    newVypElement.classList.add("details-y-precio");
-    let newPrecioElement = document.createElement("p");
-    newPrecioElement.textContent = "Price $" + evento.price;
-    newVypElement.appendChild(newPrecioElement);
-    let newLinkElement = document.createElement("a");
-    newLinkElement.href = "#";
-    newLinkElement.classList.add("btn", "btn-primary");
-    newLinkElement.textContent = "Details";
-    newVypElement.appendChild(newLinkElement);
-    newDivElement.appendChild(newVypElement);
-
-    //agrgar todo al padre
-    fragmen.appendChild(newDivElement);
-
-    parentElem.appendChild(fragment);
-
-
-}
-const currentDate = new Date(data.currentDate)
+let parentElement = document.getElementById('cards');
+let fragment = document.createDocumentFragment();
 let pastEvents = []
-let upcomingEvents = []
 
-for (let i = 0; i < data.events.length; i++) {
-    const event = data.events[i];
-    const eventDate = new Date(event.date);
+datosApi = (data) => {
 
-    if (eventDate < currentDate) {
-        pastEvents.push(event);
-    } else {
-        upcomingEvents.push(event)
+    for (let i = 0; i < data.events.length; i++) {
+
+        //nuevo div
+        let newDivElement = document.createElement("div");
+        newDivElement.classList.add("card", "p-2", "border");
+
+
+        //agregar img al div
+        let newImgElement = document.createElement("img");
+        newImgElement.src = data.events[i].image;
+        newImgElement.classList.add("card-img-top");
+
+        newDivElement.appendChild(newImgElement);
+
+        //titulo del div
+        let newTitleElemnt = document.createElement("h4");
+        newTitleElemnt.classList.add("card-title", "d-flex", "justify-content-center");
+        newTitleElemnt.textContent = data.events[i].name;
+        newDivElement.appendChild(newTitleElemnt);
+
+
+        //descripcion
+        let newDescElement = document.createElement("p");
+        newDescElement.classList.add("card-text", "d-flex", "justify-content-center");
+        newDescElement.textContent = data.events[i].description;
+        newDivElement.appendChild(newDescElement);
+
+        //precio y "details"
+        let newVypElement = document.createElement("div");
+        newVypElement.classList.add("details-y-precio");
+        let newPrecioElement = document.createElement("p");
+        newPrecioElement.textContent = "Price $" + data.events[i].price;
+        newVypElement.appendChild(newPrecioElement);
+        let newLinkElement = document.createElement("a");
+        newLinkElement.href = `./details.html?id=${data.events[i]._id}`;
+        newLinkElement.classList.add("btn-details", "btn-outline-dark");
+        newLinkElement.textContent = "Details";
+        newVypElement.appendChild(newLinkElement);
+        newDivElement.appendChild(newVypElement);
+        let newCategoryElement = document.createElement("p");
+        newCategoryElement.classList.add("card-category");
+        newCategoryElement.textContent = data.events[i].category;
+        newDivElement.appendChild(newCategoryElement);
+        newDivElement.classList.add("card", "p-2", "border", data.events[i].category);
+        newDivElement.dataset.category = data.events[i].category;
+
+
+
+
+        //agrgar todo al padre
+        fragment.appendChild(newDivElement);
+
+        parentElement.appendChild(fragment);
+
+
     }
-}
-console.log(pastEvents)
 
 
-//////////search/////////
 
-const form = document.querySelector('form');
 
-form.addEventListener('keyup', (event) => {
-    event.preventDefault();
 
-    const searchTerm = document.querySelector('#search-input').value.toLowerCase();
-    const events = document.querySelectorAll('.card');
+    ///////////search////////////////
 
-    for (let i = 0; i < events.length; i++) {
-        const name = events[i].querySelector('.card-title').textContent.toLowerCase();
-        const description = events[i].querySelector('.card-text').textContent.toLowerCase();
+    const eventsContainer = document.querySelector('#events-container');
+    const noResultsText = document.querySelector('#no-results-text');
 
-        if (name.includes(searchTerm) || description.includes(searchTerm)) {
-            events[i].style.display = '';
-            events[i].classList.remove('hidden');
+    const searchInput = document.querySelector('#search-input');
+
+    searchInput.addEventListener('input', (event) => {
+        const searchTerm = event.target.value.trim().toLowerCase();
+        const cards = document.querySelectorAll('.card');
+        let foundResults = false;
+
+        cards.forEach((card) => {
+            const title = card.querySelector('.card-title').textContent.trim().toLowerCase();
+            //const description = card.querySelector('.card-text:last-of-type').textContent.trim().toLowerCase();
+            const category = card.querySelector('.card-category').textContent.trim().toLowerCase();
+
+            if (title.includes(searchTerm) || category.includes(searchTerm)) {
+                card.style.display = 'block';
+                foundResults = true;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (!foundResults) {
+            noResultsText.style.display = 'block';
         } else {
-            events[i].style.display = 'none';
-            events[i].classList.add('hidden');
+            noResultsText.style.display = 'none';
         }
+    });
+
+
+
+    ///////////filtros checkboxes////////////
+
+
+    ////filtrar category////
+    function getCategoryArray(data) {
+        const categorySet = new Set();
+        for (let i = 0; i < data.events.length; i++) {
+            categorySet.add(data.events[i].category);
+        }
+        return Array.from(categorySet);
     }
-});
+
+
+    const categoryArray = getCategoryArray(data);
+    console.log(categoryArray);
+
+
+    ///////genera checkbox//////
+
+
+    function generateCheckboxes(categories) {
+        const checkboxContainer = document.querySelector('#category-container');
+
+        categories.forEach(category => {
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.name = 'category'; 
+            checkbox.value = category;
+            checkbox.addEventListener('click', filterEventsByCategory);
+            checkbox.classList.add('category-checkbox');
+
+
+            const label = document.createElement('label');
+            label.textContent = category;
+
+            checkboxContainer.appendChild(checkbox);
+            checkboxContainer.appendChild(label);
+        });
+    }
+
+
+    const checkboxContainer = document.querySelector('#category-container');
+    checkboxContainer.addEventListener('click', () => {
+        if (selectedCategories.length === 0) {
+            const checkboxes = document.querySelectorAll('.category-checkbox');
+            checkboxes.forEach(c => c.checked = false);
+        }
+    });
 
 
 
-function createCheckbox(name, value, id, labelText) {
-    var label = document.createElement("label");
-    label.innerHTML = labelText;
+    ////////filtrar checkbox por category/////////
 
-    var checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.name = name;
-    checkbox.value = value;
-    checkbox.id = id;
 
-    label.appendChild(checkbox);
+    let selectedCategories = [];
 
-    return label;
+    function filterEventsByCategory(event) {
+        const category = event.target.value;
+
+        // Agregar o eliminar categoría seleccionada
+        if (event.target.checked) {
+            selectedCategories.push(category);
+        } else {
+            selectedCategories = selectedCategories.filter(c => c !== category);
+        }
+
+        // Mostrar tarjetas correspondientes a las categorías seleccionadas
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            if (selectedCategories.length === 0 || selectedCategories.includes(card.dataset.category)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+
+    generateCheckboxes(categoryArray);
 }
-
-
-var checkboxesDiv = document.getElementById("checkboxes");
-
-checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Food Fair"));
-checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Museum"));
-checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Race"))
-checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Book Exchange"))
-checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Music Concert"))
-checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Costum Party"))
-checkboxesDiv.appendChild(createCheckbox("checkbox", "category", "checkbox", "Cinema"))

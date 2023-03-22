@@ -59,37 +59,22 @@
         </div>
     </header>
     <main>
-        <div class="options">
-            <div class="category">
-                <input type="checkbox" id="checkboxes1" name="position" value="category">
-                <label class="label-category" for="category">Food Fair</label>
-                <br>
-                <input type="checkbox" id="checkboxes1" name="position" value="category">
-                <label class="label-category" for="category">Museum</label>
-                <br>
-                <input type="checkbox" id="checkboxes1" name="position" value="category">
-                <label class="label-category" for="category">Race</label>
-                <br>
-                <input type="checkbox" id="checkboxes1" name="position" value="category">
-                <label class="label-category" for="category">Book Exchange</label>
-                <br>
-                <input type="checkbox" id="checkboxes1" name="position" value="category">
-                <label class="label-category" for="category">Music Concert</label>
-                <br>
-                <input type="checkbox" id="checkboxes1" name="position" value="category">
-                <label class="label-category" for="category">Costum Party</label>
-                <br>
-                <input type="checkbox" id="checkboxes1" name="position" value="category">
-                <label class="label-category" for="category">Cinema</label>
-            </div>
-        </div>
+        <div id="category-container"></div>
+        <div class=".category-checkbox"></div>
+
         <section>
             <div class="conteiner-card">
                 <p id="no-results-text" class="no-results">No se encontraron eventos que coincidan con su búsqueda.</p>
                 <div class="d-flex" id="cards">
+                    <div class="card-category"></div>
+
                 </div>
+
             </div>
+
+
         </section>
+
     </main>
     <footer class="bd-footer py-2 py-md-0 mt-0">
         <div class="container py-2 py-md-2 px-2 px-md-2 text-body-secondary">
@@ -106,7 +91,7 @@
             </div>
         </div>
     </footer>
-    <script src="./script/data.js"></script>
+    <script src="./script/data_api.js"></script>
     <script src="./script/index.js"></script>
     <script src="./script/past.js"></script>
     <script src="./script/details.js"></script>

@@ -191,10 +191,20 @@ td {
     background-color: #e2e2e2da;
 }
 
-th {
-    background-color: rgb(238, 85, 144);
+td {
+    text-align: center;
 }
 
+th {
+    background-color: rgb(238, 85, 144);
+    font-size: x-large;
+    text-align: center;
+}
+
+.tabla-subtitulo {
+    font-weight: 600;
+    text-align: center;
+}
 
 
 #cards {
@@ -279,9 +289,8 @@ h4 {
 
 
 
-.cardImg {
+.card-img {
     width: 50%;
-    justify-content: center;
     margin-top: 1rem;
     margin-bottom: 1rem;
     border: 1rem solid #d90368;
@@ -341,6 +350,11 @@ h4 {
     font-size: 22px;
 }
 
+.card-category {
+    display: none;
+}
+
+
 .card-body-price {
     font-weight: 600;
     background-color: #d90368;
@@ -367,7 +381,7 @@ h4 {
     }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-    .cardImg {
+    .card-img {
         width: 90%;
     }
 
@@ -396,6 +410,7 @@ h4 {
     }
 
 
+
     .row {
         margin-right: 0;
     }
@@ -410,7 +425,7 @@ h4 {
 /* checkbox */
 
 
-div#checkboxes {
+div#category-container {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
